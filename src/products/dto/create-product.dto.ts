@@ -1,1 +1,37 @@
-export class CreateProductDto {}
+import { IsArray, IsIn, IsInt, IsNumber,
+     IsOptional, IsPositive, IsString, MinLength } from 'class-validator';
+
+export class CreateProductDto {
+
+    //they are decorators that define their state
+
+    @IsString() 
+    @MinLength(1)
+    title:string;
+    
+    @IsNumber()
+    @IsPositive()
+    @IsOptional()
+    price?:number;
+    
+    @IsString()
+    @IsOptional()
+    description?:string;
+
+    @IsString()
+    @IsOptional()
+    slug?:string;
+
+    @IsInt()
+    @IsPositive()
+    @IsOptional()
+    stock?:number;
+
+    @IsString({each: true})
+    @IsArray()
+    sizes:string[];
+
+    @IsIn(['men','women','unisex','kit']) //un arreglo, si no vienen estos valores, entonces no se va a permitir (valores predefinidos)
+    gender:string;
+
+}
