@@ -31,7 +31,7 @@ export class CreateProductDto {
     @IsArray()
     sizes:string[];
 
-    @IsIn(['men','women','unisex','kit']) //un arreglo, si no vienen estos valores, entonces no se va a permitir (valores predefinidos)
+    @IsIn(['men','women','unisex','kid']) //un arreglo, si no vienen estos valores, entonces no se va a permitir (valores predefinidos)
     gender:string;
 
 }
