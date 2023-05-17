@@ -1,0 +1,4 @@
+//yarn no se reconcoce comando climt
+//elimine los archivos de yarn.lok de la carpeta y globalmnte e instale de nuevo
+//la version de yarn de nuevo
+// en el package.json como arranque del proyecto idealice "yarn start:dev"
