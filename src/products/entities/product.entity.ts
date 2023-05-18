@@ -51,7 +51,13 @@ export class Product {
             .replaceAll("'",'')
     }
 
-    //@BeforeUpdate()
+    @BeforeUpdate()
+    checkSlugUpdate(){
+        this.slug=this.slug
+            .toLocaleLowerCase()
+            .replaceAll(' ','_')
+            .replaceAll("'",'')
+    }
 
 } // (entity)representacion  de la base base de datos
 

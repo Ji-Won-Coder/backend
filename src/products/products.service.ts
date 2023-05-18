@@ -18,7 +18,7 @@ export class ProductsService {
 
 
     @InjectRepository(Product)
-    private readonly productRepository: Repository<Product>,
+    private readonly productRepository: Repository<Product>
   
   ){}
   
@@ -45,14 +45,21 @@ export class ProductsService {
      });
     }
   
-    async findOne(term: string) {
+    async findOne(term:string) {
       
 
       let product: Product;
+
+      //inyeccion de dependencias (sql)x
       if(isUUID(term)){
-      product = await this.productRepository.findOneBy({id:term})
+      product = await this.productRepository.findOneBy({id:term});
       }else{
-        product = await this.productRepository.findOneBy({slug:term})
+       const queryBuilder = this.productRepository.createQueryBuilder();
+       product = await queryBuilder
+       .where('UPPER(title) =:title or slug =:slug',{
+         title:term.toUpperCase(),
+         slug: term.toLowerCase(),
+       }).getOne();
       }
 
 
@@ -62,25 +69,38 @@ export class ProductsService {
       return product
     }
   
-    update(id: number, _updateProductDto: UpdateProductDto) {
-      return `This action updates a #${id} product`;
+    async update(id: string, updateProductDto: UpdateProductDto) {
+
+      const product = await this.productRepository.preload({
+        id:id,
+        ...updateProductDto 
+      })
+      if(!product) throw new NotFoundException(`product with id: ${id} not found`)
+
+      try {
+        await this.productRepository.save(product);
+      return product;
+      } catch (error) {
+        this.handleDBExceptions(error);
+      }
+
     }
-  
-    async remove(id: string) {
-     const product = await this.findOne(id);
 
-     await this.productRepository.remove(product);
-    
-    }
+     async remove(id: string) {
+      const product = await this.findOne(id);
+      await this.productRepository.remove(product);
+     }
 
-    //ERROR CONTROLADO
-    private handleDBExceptions(error:any){//todo tipo de error
-      if(error.code == '23505' )
-      throw new BadRequestException(error.detail);
 
-      this.logger.error(error)
-      throw new InternalServerErrorException('Unexpected error, check server logs');
-  }
+
+     //ERROR CONTROLADO
+      private handleDBExceptions(error:any){//todo tipo de error
+       if(error.code == '23505' )
+       throw new BadRequestException(error.detail);
+
+       this.logger.error(error)
+       throw new InternalServerErrorException('Unexpected error, check server logs');
+      }
 }
 
   
