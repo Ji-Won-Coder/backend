@@ -1,9 +1,11 @@
-import { BadRequestException, Injectable, InternalServerErrorException,Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException,Logger, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm/dist/common';
 import { Repository } from 'typeorm';
+import { paginationDto } from './dto/pagination.dto';
+import { skip } from 'rxjs';
 
 
 @Injectable()
@@ -22,13 +24,6 @@ export class ProductsService {
   
     async create(createProductDto: CreateProductDto) {
     try {
-
-      if(!createProductDto.slug){
-        createProductDto.slug =createProductDto.title.toLocaleLowerCase().replaceAll(' ','_').replaceAll("'",' ')
-      }
-
-
-      
       const product= this.productRepository.create(createProductDto) //crear un producto con sus propiedades
       await this.productRepository.save(product); //guarda el producto en bd
 
@@ -39,25 +34,39 @@ export class ProductsService {
     }
     }
   
-    findAll() {
-      return `This action returns all products`;
+    findAll(pagination:paginationDto) {
+
+      const {limit =10, offset = 0 }=pagination
+
+     return this.productRepository.find({
+      take:limit,
+      skip:offset,
+      //todo relaciones
+     });
     }
   
-    findOne(id: number) {
-      return `This action returns a #${id} product`;
+    async findOne(id: string) {
+      
+      const product = await this.productRepository.findOneBy({id});
+      if(!product) throw new NotFoundException (`Product whit id ${id} not found `);
+
+      return product
     }
   
     update(id: number, _updateProductDto: UpdateProductDto) {
       return `This action updates a #${id} product`;
     }
   
-    remove(id: number) {
-      return `This action removes a #${id} product`;
+    async remove(id: string) {
+     const product = await this.findOne(id);
+
+     await this.productRepository.remove(product);
+    
     }
 
     //ERROR CONTROLADO
-  private handleDBExceptions(error:any){//todo tipo de error
-    if(error.code == '23505' )
+    private handleDBExceptions(error:any){//todo tipo de error
+      if(error.code == '23505' )
       throw new BadRequestException(error.detail);
 
       this.logger.error(error)
