@@ -33,4 +33,9 @@ export class CreateProductDto {
     @IsIn(['men','women','unisex','kid']) //un arreglo, si no vienen estos valores, entonces no se va a permitir (valores predefinidos)
     gender:string;
 
+    @IsArray()
+    @IsString({each: true})
+    @IsOptional()
+    tags: string[];
+
 }
