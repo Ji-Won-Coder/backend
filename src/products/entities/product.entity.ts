@@ -52,6 +52,7 @@ export class Product {
         { cascade: true, eager: true }
     )
     images?: ProductImage[];
+    static images: any;
 
 
     @BeforeInsert()
