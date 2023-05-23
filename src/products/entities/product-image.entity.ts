@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Product } from './product.entity';
 
 @Entity({name: 'products_images'})
-export class CreateProductDto {
+export class  ProductImage {
 
 @PrimaryGeneratedColumn()
 id: number
@@ -10,7 +10,8 @@ id: number
 url:string;
 
 @ManyToOne( 
-    () => Product.images,
+    () => Product,
+    (product) => Product.images,
     {onDelete:'CASCADE'}
 )
 

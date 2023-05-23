@@ -118,8 +118,9 @@ export class ProductsService {
            product.images = images.map( 
             image => this.productImageRepository.create({url:image}))
         }
+        //await this.productRepository.save(product);
         await queryRunner.manager.save(product);
-//        await this.productRepository.save(product);
+
         await queryRunner.commitTransaction();
         await queryRunner.release();
 
@@ -128,6 +129,7 @@ export class ProductsService {
       } catch (error) {
         await queryRunner.rollbackTransaction();
         await queryRunner.release();
+        this.handleDBExceptions(error);
       }
 
     }
@@ -145,6 +147,7 @@ export class ProductsService {
        throw new BadRequestException(error.detail);
 
        this.logger.error(error)
+       //console.log (error)
        throw new InternalServerErrorException('Unexpected error, check server logs');
       }
 
