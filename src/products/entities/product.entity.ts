@@ -1,6 +1,6 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, ObjectType, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({name: 'products'})
 
 export class Product {
     @PrimaryGeneratedColumn('uuid')
@@ -43,6 +43,7 @@ export class Product {
         default:[]
     })
     tags:string[];
+    static images: ObjectType<unknown>;
 
 
     @BeforeInsert()
