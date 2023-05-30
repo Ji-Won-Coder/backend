@@ -1,9 +1,10 @@
-import { IsBoolean, IsDate, IsOptional, IsString, IsUrl } from "class-validator";
+import { IsBoolean, IsDate, IsOptional, IsString, IsUrl, MinLength } from "class-validator";
 
 export class CreateObraDto {
 
 
     @IsString()
+    @MinLength(1)
     name_obra:string;
 
     @IsString()
