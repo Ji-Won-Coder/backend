@@ -1,3 +1,4 @@
+import { type } from "os";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -14,11 +15,11 @@ export class User {
   @Column('text')
   country_user: string;
 
-  @Column('int')
+  @Column('integer')
   cell_phone_user: number;
 
-  @Column('date')
-  birthday_date_user: Date;
+  @Column({type: 'date'})
+  birthday_date_user: string;
   
   @Column('text')
   email_user: string;
@@ -29,6 +30,8 @@ export class User {
   @Column('text')
   status_user: string;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Column({ type: "timestamp",
+   default: () => "CURRENT_TIMESTAMP"
+   })
   created_at: Date;
 }

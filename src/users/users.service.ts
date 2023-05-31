@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UsersService {
   constructor(
+    //@InjectRepositor interactua con la BD
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
