@@ -20,9 +20,7 @@ export class Publication {
   created_at: Date;
   
 
-  @OneToMany(
-    ()=> User,
-    (user) =>user.Publication
+  @OneToMany(()=> User,user =>user.publicaciones
   )
   user: User;
 
