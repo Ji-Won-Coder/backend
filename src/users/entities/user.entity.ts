@@ -1,5 +1,6 @@
-import { type } from "os";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+//import { Publication } from "src/publications/entities/publication.entity";
+
 
 @Entity()
 export class User {
@@ -34,4 +35,15 @@ export class User {
    default: () => "CURRENT_TIMESTAMP"
    })
   created_at: Date;
+
+  // @OneToMany(
+  //   () => Publication,
+  //   (publication) => publication.user,
+  //   {cascade:true}
+  //   )
+  //   id_user:Publication
+  // Publication: string;
+
+
+
 }
