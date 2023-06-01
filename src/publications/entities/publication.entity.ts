@@ -1,5 +1,5 @@
-import { Column, Entity,ManyToOne,PrimaryColumn, PrimaryGeneratedColumn,} from "typeorm";
-import { User } from "src/users/entities/user.entity";
+import { Column, Entity,  OneToMany, PrimaryColumn, PrimaryGeneratedColumn,} from "typeorm";
+import {User} from "src/users/entities/user.entity";
 
 @Entity()
 export class Publication {
@@ -20,7 +20,7 @@ export class Publication {
   created_at: Date;
   
 
-  @ManyToOne(
+  @OneToMany(
     ()=> User,
     (user) =>user.Publication
   )
