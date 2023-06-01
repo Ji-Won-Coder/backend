@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn, PrimaryGeneratedColumn,} from "typeorm";
+import {user} from "src/users/entities/user.entity";
 
 @Entity()
 export class Publication {
