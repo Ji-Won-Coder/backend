@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany,PrimaryColumn, PrimaryGeneratedColumn,} from "typeorm";
+import { Column, Entity,ManyToOne,PrimaryColumn, PrimaryGeneratedColumn,} from "typeorm";
 import { User } from "src/users/entities/user.entity";
 
 @Entity()
@@ -20,7 +20,7 @@ export class Publication {
   created_at: Date;
   
 
-  @ManyToMany(
+  @ManyToOne(
     ()=> User,
     (user) =>user.Publication
   )
