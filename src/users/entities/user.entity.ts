@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Publication } from "src/publications/entities/publication.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
 
 
 @Entity()
@@ -36,14 +37,10 @@ export class User {
    })
   created_at: Date;
 
-   @OneToMany(
-     () => Publication,
-     (publication) => publication.user,
-     {cascade:true}
-     )
-     id_user:Publication
-   Publication: string;
 
 
+   //un usuario puede tener muchas publicaciones.
+   @OneToMany(() => Publication,publication => publication.user)
+    publicaciones:Publication
 
 }
