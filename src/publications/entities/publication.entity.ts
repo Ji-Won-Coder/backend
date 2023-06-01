@@ -1,5 +1,5 @@
-import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn, PrimaryGeneratedColumn,} from "typeorm";
-import {user} from "src/users/entities/user.entity";
+import { Column, Entity, ManyToMany,PrimaryColumn, PrimaryGeneratedColumn,} from "typeorm";
+import { User } from "src/users/entities/user.entity";
 
 @Entity()
 export class Publication {
@@ -21,9 +21,9 @@ export class Publication {
   
 
   @ManyToMany(
-    ()=> user,
+    ()=> User,
     (user) =>user.Publication
   )
-  id_user:user;
+  user: User;
 
 }
