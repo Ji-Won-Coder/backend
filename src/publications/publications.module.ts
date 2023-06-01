@@ -10,6 +10,10 @@ import { Publication } from './entities/publication.entity';
   imports: [ 
     TypeOrmModule.forFeature([Publication])
 
-  ]
+  ],
+  exports:[
+    PublicationsService,
+    TypeOrmModule,
+  ],
 })
 export class PublicationsModule {}

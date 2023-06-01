@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, Timestamp } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn, PrimaryGeneratedColumn,} from "typeorm";
 
 @Entity()
 export class Publication {
@@ -17,5 +17,12 @@ export class Publication {
 
   @Column({type:"timestamp", default:()=> "CURRENT_TIMESTAMP"})
   created_at: Date;
+  
+
+  @ManyToMany(
+    ()=> user,
+    (user) =>user.Publication
+  )
+  id_user:user;
 
 }

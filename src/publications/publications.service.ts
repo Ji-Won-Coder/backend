@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
 import { Repository } from 'typeorm';
@@ -12,12 +12,18 @@ export class PublicationsService {
      private readonly publicationRepository:Repository<Publication>,
   ){}
 
-
   async create(createPublicationDto: CreatePublicationDto) {
 
-    const publicacion=this.publicationRepository.create(publicacion)
-    await this.publicationRepository.save(Publication)
+    try {
+    const publicacion=this.publicationRepository.create(createPublicationDto)
+    await this.publicationRepository.save(publicacion);
     return publicacion;
+
+    } catch (error) {
+      console.log(error)
+      throw new InternalServerErrorException('Ayuda!');
+    }
+    
   }
 
   findAll() {

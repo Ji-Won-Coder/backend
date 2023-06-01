@@ -1,12 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
-import { UsersModule } from './users/users.module';
 import { PublicationsModule } from './publications/publications.module';
 
 @Module({
@@ -25,7 +22,6 @@ import { PublicationsModule } from './publications/publications.module';
     ProductsModule,
     CommonModule,
     SeedModule,
-    UsersModule,
     PublicationsModule,
   ],
   
