@@ -32,7 +32,7 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, UpdateUserDto: UpdateUserDto) {
+  update(id: number, _UpdateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
 

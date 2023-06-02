@@ -24,7 +24,6 @@ import { PublicationsModule } from './publications/publications.module';
     CommonModule,
     SeedModule,
     UsersModule,
-    
     PublicationsModule,
   ],
   

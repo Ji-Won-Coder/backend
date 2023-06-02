@@ -12,5 +12,4 @@ export class CreatePublicationDto {
     created_at:Date; 
 
 
-
 }

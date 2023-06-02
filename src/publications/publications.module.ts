@@ -3,12 +3,13 @@ import { PublicationsService } from './publications.service';
 import { PublicationsController } from './publications.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Publication } from './entities/publication.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Module({
   controllers: [PublicationsController],
   providers: [PublicationsService],
   imports: [ 
-    TypeOrmModule.forFeature([Publication])
+    TypeOrmModule.forFeature([Publication,User])
 
   ],
   exports:[
