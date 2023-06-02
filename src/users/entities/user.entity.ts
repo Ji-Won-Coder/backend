@@ -41,6 +41,6 @@ export class User {
 
    //un usuario puede tener muchas publicaciones.
    @OneToMany(() => Publication,publication => publication.user)
-    publicaciones:Publication
+    publication:Publication
 
 }
