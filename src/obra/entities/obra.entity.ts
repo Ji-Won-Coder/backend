@@ -19,8 +19,8 @@ export class Obra {
     @Column('boolean')
     active:boolean;
 
-    @Column('date')
-    created_at:Date;
+    @Column('type : Date')
+    created_at:string;
 
 
 
