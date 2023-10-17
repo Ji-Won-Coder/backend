@@ -103,8 +103,10 @@ export class ProductsService {
       const {images, ...toUpdate} = updateProductDto;
 
       const product = await this.productRepository.preload({id, ...toUpdate});
+
       if(!product) throw new NotFoundException(`product with id: ${id} not found`);
 
+      
       //create query runner
        const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();

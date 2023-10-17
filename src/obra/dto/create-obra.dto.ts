@@ -1,12 +1,10 @@
-import { IsBoolean, IsDate, IsOptional, IsString, IsUrl, MinLength } from "class-validator";
-import { type } from "os";
+import { IsBoolean,IsOptional, IsString, IsUrl, } from "class-validator";
 import { Url } from "url";
 
 export class CreateObraDto {
 
 
     @IsString()
-    @MinLength(1)
     name_obra:string;
 
     @IsString()
@@ -19,8 +17,6 @@ export class CreateObraDto {
     @IsBoolean()
     active:boolean;
 
-    @IsDate({ type:'timestamp',default: ()=>'CURRENT_TIMESTAMP'})
-    create_at:Date;
 
  
 

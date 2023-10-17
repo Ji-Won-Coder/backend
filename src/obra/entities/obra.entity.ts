@@ -7,7 +7,7 @@ export class Obra {
     @PrimaryGeneratedColumn('uuid')
     id_obra:string;
 
-    @Column('text:')
+    @Column('text')
     name_obra:string;
 
     @Column('text')
@@ -19,8 +19,8 @@ export class Obra {
     @Column('boolean')
     active:boolean;
 
-    @Column('type : Date')
-    created_at:string;
+    @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    created_at:Date;
 
 
 
